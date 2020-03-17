@@ -143,9 +143,14 @@
     <li>使用 v-for 來呈現資料列表</li>
     <li>使用 v-if 擷取部分資訊</li>
   </ol>
-</div>
+</div> 
 
 <div id="app">
+  <ul>
+    <li v-for="(item, index) in list" v-if="item.age < 25">
+      {{index+1}}.{{item.name}} Age: {{item.age}}
+    </li>
+  </ul>
   
 </div>
 

@@ -141,24 +141,24 @@
 <div class="alert alert-secondary">
   <ol class="mb-0">
     <li>使用雙花括號與資料串接</li>
-    <li>試試看使用 HTML 屬性綁定</li>
+    <li>試試看使用 HTML 屬性綁定 html可以把tag一起渲染進去，text不行</li>
     <li>試試看雙向綁定</li>
   </ol>
 </div>
 
 
 <div id="app">
-  <input type="text">
+  {{message}}
+  <div v-html='message'></div>
+  <input type="text" v-model="message">
 </div>
 
 <script>
 var app = new Vue({
   el: '#app',
-  // 在此建立資料內容
-
-  // data: {
-  //   message: '哈囉'
-  // }
+  data: {
+    message: '哈囉你好嗎？'
+  }
 })
 </script> 
         </div>

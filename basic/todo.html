@@ -150,70 +150,65 @@
 				<div class="alert alert-secondary">
 					<ol class="mb-0">
 						<li>請跟隨課程完成此章節。</li>
-						<li></li>
 					</ol>
 				</div>
-				<!-- todo 
-  1.先定義一個todos的陣列來存資料內容 用v-for的方式產生列表
 
--->
 
 				<div id="app">
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon1">待辦事項</span>
 						</div>
-						<!-- 新增新的代辦內容 -->
-						<input type="text" class="form-control" placeholder="準備要做的任務" v-model="newTodo"
-							@keyup.enter="ceratTodo">
-						<!-- 新增新的代辦內容 -->
+						<input type="text" class="form-control" placeholder="準備要做的任務"  v-model="newtodo">
 						<div class="input-group-append">
-							<button class="btn btn-primary" type="button" @click="ceratTodo">新增</button>
+							<button class="btn btn-primary" type="button" @click="addTodo">新增</button>
 						</div>
 					</div>
 					<div class="card text-center">
 						<div class="card-header">
 							<ul class="nav nav-tabs card-header-tabs">
 								<li class="nav-item">
-									<a class="nav-link" :class="{'active': visivility == 'all'}"
-										@click="visivility = 'all'" href="#">全部</a>
+									<a class="nav-link active" href="#">全部</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" :class="{'active': visivility == 'active'}"
-										@click="visivility = 'active'" href="#">進行中</a>
+									<a class="nav-link " href="#">進行中</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" :class="{'active': visivility == 'completed'}"
-										@click="visivility = 'completed'" href="#">已完成</a>
+									<a class="nav-link" href="#">已完成</a>
 								</li>
 							</ul>
 						</div>
-						<!-- 列表 -->
 						<ul class="list-group list-group-flush text-left">
-							<!-- 項目 -->
-							<li class="list-group-item" v-for="(item,key) in filterTodos">
+							<li class="list-group-item" v-for="item in todos">
 								<div class="d-flex">
 									<div class="form-check">
-										<input type="checkbox" class="form-check-input" :id="item.id"
-											v-model="item.completed">
-										<label class="form-check-label" :for="item.id"
-											:class="{'completed':item.completed}">
-											Key:{{key}}
+										<input type="checkbox" class="form-check-input" :id="item.id">
+										<label class="form-check-label" :for="item.id">
 											{{item.title}}
 										</label>
 									</div>
-									<button type="button" class="close ml-auto" aria-label="Close" @click="removeTodo">
+									<button type="button" class="close ml-auto" aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
 								</div>
 							</li>
-							<!-- 項目 -->
-							
+							<li class="list-group-item">
+								<div class="d-flex">
+									<div class="form-check">
+										<input type="checkbox" class="form-check-input" id="a1">
+										<label class="form-check-label completed" for="a1">
+											Cras justo odio
+										</label>
+									</div>
+									<button type="button" class="close ml-auto" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+							</li>
 							<li class="list-group-item">
 								<input type="text" class="form-control">
 							</li>
 						</ul>
-						<!-- 列表 -->
 						<div class="card-footer d-flex justify-content-between">
 							<span>還有 3 筆任務未完成</span>
 							<a href="#">清除所有任務</a>
@@ -225,59 +220,26 @@
 					var app = new Vue({
 						el: '#app',
 						data: {
-							todos: [
-								{
-									id: '4562',
-									title: '練習練習練習',
-									completed: false
+							todos:[
+								{id:'03948',
+								title:'待辦事項1',
+								completed:false
 								}
 							],
-							newTodo: '',
-							visivility: 'all'
+							newtodo:''
 						},
 						methods: {
-							ceratTodo: function () {
-								var value = this.newTodo.trim();
-								var timestamp = Math.floor(Date.now())
-								console.log(value, timestamp)
+							addTodo:function(){
+								var timestamp = Math.floor( Date.now());
 
-								if (!value) return;
 								this.todos.push({
-									id: timestamp,
-									title: value,
-									completed: false
-								})
-								this.newTodo = '';
-							},
-							removeTodo: function (key) {
-								this.todos.splice(key, 1)
+									id:timestamp,
+									title:this.newtodo,
+									completed:false
+								});
 							}
 						},
 						
-						computed:{
-							filterTodos:function(){
-								if(this.visivility == 'all'){
-									return this.todos;
-								}else if(this.visivility == 'active'){
-									var activeTodo = [];
-									this.todos.forEach(function(item){
-										if(!item.completed){
-											activeTodo.push(item);
-										}
-									});
-									return activeTodo;
-								}else {
-									var completedTodo = [];
-									this.todos.forEach(function(item){
-										if(item.completed){
-											completedTodo.push(item);
-										}
-									});
-									return completedTodo;
-								}
-								
-							}
-						}
 					});
 				</script>
 

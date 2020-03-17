@@ -141,6 +141,9 @@
 <div class="alert alert-secondary">
   <ol class="mb-0">
     <li>將以下元素轉為元件</li>
+    <li>Vue.conponent('component的名稱',{物件})</li>
+    <li>component裡面的data是用function的方式return 一個物件，搭配一個template 
+    </li>
   </ol>
 </div>
 
@@ -148,10 +151,25 @@
   <div>
     你已經點擊 <button class="btn btn-outline-secondary btn-sm" @click="counter += 1">{{ counter }}</button> 下。
   </div>
+  <counter-component></counter-component>
+  <counter-component></counter-component>
+  <counter-component></counter-component>
+  <counter-component></counter-component>
+  <counter-component></counter-component>
 </div>
 
 <script>
 // 請在此撰寫 JavaScript
+Vue.component('counter-component',{
+  data:function(){
+    return {
+      counter:0
+    }
+  },
+  template:`
+  你已經點擊 <button class="btn btn-outline-secondary btn-sm" @click="counter += 1">{{ counter }}</button> 下。
+  `
+});
 
 
 var app = new Vue({

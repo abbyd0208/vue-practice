@@ -141,13 +141,15 @@
 <div class="alert alert-secondary">
   <ol class="mb-0">
     <li>為 .box 動態加上 className "rotate"</li>
+    <li>在綁定:class的時候 {'要新增的className':'判斷式'}</li>
+    <li>在綁定事件的時候，不一定要用method 可以直接寫表達式</li>
   </ol>
 </div>
 
 <div id="app">
-  <div class="box"></div>
+  <div class="box" :class=" {'rotate' : isTransform} "></div>
   <hr>
-  <button class="btn btn-outline-primary">選轉物件</button>
+  <button class="btn btn-outline-primary" @click="isTransform = !isTransform">選轉物件</button>
 </div>
 
 <script>
