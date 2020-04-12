@@ -112,6 +112,10 @@ const people = [
     money: 500
   },
   {
+    name: '老媽',
+    money: 1000000
+  },
+  {
     name: '漂亮阿姨',
     money: 3000
   },
@@ -119,33 +123,87 @@ const people = [
     name: '杰倫',
     money: 60000
   },
-  {
-    name: '老媽',
-    money: Infinity
-  }
 ];
+
+
 
 // forEach 與 map
 // 將所有物件增加 icash 有多少金額的欄位
 
+// 1.forEach =========================
+// people.forEach(function(item,index,array){
+//   item.icash = item.money + 500;
+//   console.log(item,index,array)
+// });
 
-// filter
+// 2.map ============================
+// map會產生一個新的陣列，需要變數去接
+// const newPeople = people.map(function(item,index){
+//   return {
+//     ...item,
+//     icash : item.money+500
+//   }
+// });
+// console.log(newPeople);
+
+// 4.filter ============================
+// 會回傳一個值，裡面只要回傳或ture || false就好，會回傳陣列
 // 挑出金額少於 5000 的物件
+// const filterPeople = people.filter(function(item,index){
+//   if(item.money < 5000){
+//     return true
+//   }
+// });
+// console.log(filterPeople)
 
-// find
+// 5.find ===============================
+// 只會回傳一次，會回傳本身的值，適合搜尋單一條件
 // 1. 找到金額 = 500 的物件
 // 2. 找到 > 5000 的物件
+// const findPeople = people.find(function(item,index){
+//   if(item.money == 500){
+//     return true
+//   }
+// });
+// console.log(findPeople)
 
-// every
+
+
+
+//  6.every
+// 只回傳ture 或 false 所有的條件回true，才會回傳 ture
 // 1. 所有物件是否都超過 10000 元
 // 2. 是否所有物件超過 300 元
+// const everyPeople = people.every(function(item,index){
+//   return item.money > 300
+// });
+// console.log(everyPeople);
 
-// some
+// 7.some
+// 只要其中一個內容有符合條件就可以
 // 1. 是否有物件超過 10000 元
 // 2. 是否有物件持有金額少於 300元
+// const somePeople = people.some(function(item,index){
+//   return item.money > 1000
+// });
+// console.log(somePeople);
 
-// reduce
-// 去除掉老媽，請問剩下的人有多少錢？
+
+
+// 8.reduce
+// 所有人的錢加總
+const reducePeople = people.reduce(function(prev,item,index){
+  console.log(prev)
+  return prev +item.money 
+},0);
+console.log('所有的錢'+reducePeople);
+
+const richPeople = people.reduce(function(prev,item,index){
+  console.log(prev)
+  return Math.max(prev , item.money )
+},0);
+console.log('最多錢'+richPeople);
+
 
 </script> 
         </div>
