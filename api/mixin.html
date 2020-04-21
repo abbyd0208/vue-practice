@@ -101,6 +101,8 @@
     <tbody>
       <tr is="row-component" v-for="(item, key) in data" 
         :item="item" :key="key"></tr>
+      <tr is="row-component-two" v-for="(item, key) in data" 
+        :item="item"></tr>
     </tbody>
   </table>
 </div>
@@ -114,7 +116,27 @@
 </script>
 
 <script>
-// mixin 是多個混合的概念
+// mixin 是多個混合的概念 是一個陣列，裡面可以放多個物件
+  var mixinFliter = {
+    template: '#row-component',
+    filters: {
+      dollarSign: function (n) {
+        return `$ ${n}`
+      },
+      currency: function (n) {
+        return n.toFixed(2).replace(/./g, function (c, i, a) {
+          return i && c !== "." && ((a.length - i) % 3 === 0) ? ',' + c : c;
+        });
+      }
+    }
+  }
+
+  var minxinMounted={
+
+    mounted () {
+    console.log('這段是 Mixin 產生')
+    }
+  }
 
 Vue.component('row-component', {
   props: ['item'],
@@ -123,21 +145,23 @@ Vue.component('row-component', {
       data: {},
     }
   },
-  template: '#row-component',
-  filters: {
-    dollarSign: function (n) {
-      return `$ ${n}`
-    },
-    currency: function(n) {
-      return n.toFixed(2).replace(/./g, function(c, i, a) {
-          return i && c !== "." && ((a.length - i) % 3 === 0) ? ',' + c : c;
-      });
+  mixins:[mixinFliter,minxinMounted],
+});
+
+
+Vue.component('row-component-two', {
+  props: ['item'],
+  data: function() {
+    return {
+      data: {
+        mydata:'Abby'
+      },
     }
   },
-  mounted () {
-    console.log('這段是 Mixin 產生')
-  }
+  mixins:[mixinFliter,minxinMounted],
 });
+
+
 
 
 var app = new Vue({
