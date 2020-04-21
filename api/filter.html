@@ -102,18 +102,30 @@
       <tr is="row-component" v-for="(item, key) in data" :item="item" :key="key"></tr>
     </tbody>
   </table>
-  {{ data[1].cash }}
+  {{ data[1].cash | currency | dollorsign}}
 </div>
 
 <script type="text/x-template" id="row-component">
   <tr>
-    <td>{{ item.name }}</td>
-    <td>{{ item.cash }}</td>
-    <td>{{ item.icash }}</td>
+    <td>{{ item.name  }}</td>
+    <td>{{ item.cash | currency | dollorsign}}</td>
+    <td>{{ item.icash | currency | dollorsign}}</td>
   </tr>
 </script>
 
 <script>
+
+Vue.filter('currency',function(n){
+  return n.toFixed(2).replace(/./g, function(c, i, a) {
+        return i && c !== "." && ((a.length - i) % 3 === 0) ? ',' + c : c;
+      });
+});
+
+Vue.filter('dollorsign',function(n){
+  return `$ ${n}`
+});
+
+
 var child = {
   props: ['item'],
   template: '#row-component',
@@ -122,6 +134,18 @@ var child = {
       data: {}
     }
   },
+  // 在這邊寫只是註冊在原件上，全局就無法使用
+  // filters:{
+  //   dollorsign:function(n){
+  //     return `$ ${n}`
+  //   },
+  //   currency:function(n){
+  //     // 數字加上千分號
+  //     return n.toFixed(2).replace(/./g, function(c, i, a) {
+  //       return i && c !== "." && ((a.length - i) % 3 === 0) ? ',' + c : c;
+  //     });
+  //   }
+  // },
   mounted: function() {
     console.log('Component:', this)
   }
