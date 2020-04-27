@@ -151,6 +151,7 @@ const people = [
 // 挑出金額少於 5000 的物件
 // const filterPeople = people.filter(function(item,index){
 //   if(item.money < 5000){
+//     console.log(item)
 //     return true
 //   }
 // });
@@ -192,17 +193,17 @@ const people = [
 
 // 8.reduce
 // 所有人的錢加總
-const reducePeople = people.reduce(function(prev,item,index){
-  console.log(prev)
-  return prev +item.money 
-},0);
-console.log('所有的錢'+reducePeople);
+// const reducePeople = people.reduce(function(prev,item,index){
+//   console.log(prev)
+//   return prev +item.money 
+// },0);
+// console.log('所有的錢'+reducePeople);
 
-const richPeople = people.reduce(function(prev,item,index){
-  console.log(prev)
-  return Math.max(prev , item.money )
-},0);
-console.log('最多錢'+richPeople);
+// const richPeople = people.reduce(function(prev,item,index){
+//   console.log(prev)
+//   return Math.max(prev , item.money )
+// },0);
+// console.log('最多錢'+richPeople);
 
 
 </script> 

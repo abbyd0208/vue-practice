@@ -103,6 +103,7 @@
 <script>
 // 官方文件 https://cn.vuejs.org/v2/guide/custom-directive.html
 Vue.directive('focus', {
+  // 當注入到畫面上的時候被調用
   inserted: function(el) {
     el.focus()
   }
@@ -128,6 +129,7 @@ Vue.directive('validator', {
       el.className = 'form-control is-valid'
     }
   },
+  // 第一次綁定時
   bind: function(el, binding, vnode) {
     console.log('bind', el, binding, vnode);
     el.className = binding.value.className
